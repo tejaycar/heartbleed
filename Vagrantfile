@@ -10,6 +10,11 @@ Vagrant.configure('2') do |config|
   config.vm.network :private_network, ip: "192.168.33.10"
 
   config.vm.synced_folder "./", "/vagrant"
+  config.vm.synced_folder "~/.ec2", "/home/vagrant/.ec2"
+
+  config.vm.provider "virtualbox" do |v|
+    v.memory = 2048
+  end
 
   cmd = "if [ ! -f /tmp/installed ]; then " \
         "sudo apt-get update; sudo apt-get install -y wget git nmap; " \
