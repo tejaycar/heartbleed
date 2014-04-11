@@ -17,7 +17,7 @@ Vagrant.configure('2') do |config|
   end
 
   cmd = "if [ ! -f /tmp/installed ]; then " \
-        "sudo apt-get update; sudo apt-get install -y wget git nmap; " \
+        "sudo apt-get update; sudo apt-get install -y wget git; " \
         "cd /tmp; wget http://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz; " \
         "tar xzf go1.2.1.linux-amd64.tar.gz; " \
         "echo 'export GOPATH=/tmp\n export GOROOT=/go\n export PATH=$PATH:GOROOT/bin' >> /home/vagrant/.bashrc; " \
