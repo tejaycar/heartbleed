@@ -1,4 +1,6 @@
-$LOAD_PATH << File.dirname(File.dirname(__FILE__))
+#!/user/bin/env ruby
+
+$:.unshift File.expand_path('../../lib', __FILE__)
 require 'optparse'
 require 'lib/checks'
 require 'pp'
