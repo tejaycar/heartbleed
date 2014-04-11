@@ -2,7 +2,7 @@
 
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'optparse'
-require 'lib/checks'
+require 'checks'
 
 options = {}
 
@@ -56,8 +56,7 @@ if options[:address]
     raise Exception.new('If and address is specified, a key file must be as well')
   end
 
-  ports = get_ports options
-  options[:ports] = ports.join(':')
+  options[:ports] = get_ports(options).join(':')
 
   output << [options[:address], check_for_heartbleed(options).inspect]
 
@@ -68,7 +67,12 @@ elsif options[:input]
     options[:key] = fields[options[:key_index].to_i]
     options[:ports] = get_ports(options).join(':')
 
-    output << (fields << check_for_heartbleed(options).inspect)
+    begin
+      output << (fields << check_for_heartbleed(options).inspect)
+    rescue Exception => error
+      puts error
+      output << fields + ['CHECK FAILED']
+    end
   end
 end
 

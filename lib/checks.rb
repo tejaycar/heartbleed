@@ -1,4 +1,3 @@
-
 def check_for_heartbleed(options)
   results = {}
   options[:ports].split(':').each do |port|
@@ -36,6 +35,8 @@ def check_openssl_version(options)
   build_date = scan.last.split("on: ").last
   return version, build_date
 end
+
+private
 
 def run_ssh_command(options, command)
   keypath = ::File.join(options[:keys], options[:key])
