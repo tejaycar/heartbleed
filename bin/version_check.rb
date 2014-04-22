@@ -61,8 +61,8 @@ if options[:address]
 elsif options[:input]
   File.open(options[:input]).each do |node|
     fields = node.strip.split(',')
-    options[:address] = fields[options[:address_index].to_i]
-    options[:key] = fields[options[:key_index].to_i]
+    options[:address] = fields[options[:address_index].to_i].strip
+    options[:key] = fields[options[:key_index].to_i].strip
 
     begin
       output << (fields + check_openssl_version(options))

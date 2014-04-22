@@ -54,7 +54,7 @@ end
 
 if options[:input]
   File.open(options[:input]).each do |node|
-    options[:address], options[:key] = node.split(',')
+    options[:address], options[:key] = node.split(',').map{|n| n.strip}
     ports = get_ports options
     ports = ports.join(':')
     output << [options[:address], options[:key], ports]

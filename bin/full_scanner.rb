@@ -53,7 +53,7 @@ opt_parser.parse!
 output = []
 if options[:address]
   unless options[:key]
-    raise Exception.new('If and address is specified, a key file must be as well')
+    raise Exception.new('If an address is specified, a key file must be as well')
   end
 
   options[:ports] = get_ports(options).join(':')
@@ -63,8 +63,8 @@ if options[:address]
 elsif options[:input]
   File.open(options[:input]).each do |node|
     fields = node.strip.split(',')
-    options[:address] = fields[options[:address_index].to_i]
-    options[:key] = fields[options[:key_index].to_i]
+    options[:address] = fields[options[:address_index].to_i].strip
+    options[:key] = fields[options[:key_index].to_i].strip
     options[:ports] = get_ports(options).join(':')
 
     begin

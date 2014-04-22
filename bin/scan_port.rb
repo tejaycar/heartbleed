@@ -50,8 +50,8 @@ end
 if options[:input]
   File.open(options[:input]).each do |node|
     fields = node.split(',')
-    options[:address] = fields[options[:address_index]]
-    options[:ports] = fields[options[:ports_index]]
+    options[:address] = fields[options[:address_index]].strip
+    options[:ports] = fields[options[:ports_index]].strip
     output << [options[:address], check_for_heartbleed(options).inspect]
   end
 end

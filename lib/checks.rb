@@ -41,10 +41,7 @@ private
 def run_ssh_command(options, command)
   keypath = ::File.join(options[:keys], options[:key])
   keypath = ::File.expand_path(keypath)
-  unless ::File.exist?(keypath)
-    keypath = keypath + '.pem'
-    raise Exception.new("Keyfile #{keypath} does not exist") unless ::File.exist?(keypath)
-  end
+  raise Exception.new("Keyfile #{keypath} does not exist") unless ::File.exist?(keypath)
 
-  output = `ssh -o 'StrictHostKeyChecking no' -o 'UserKnownHostsFile /dev/null' -i #{options[:keys]}/#{options[:key]}.pem #{options[:username]}@#{options[:address]} '#{command}'`
+  output = `ssh -o 'StrictHostKeyChecking no' -o 'UserKnownHostsFile /dev/null' -i #{keypath} #{options[:username]}@#{options[:address]} '#{command}'`
 end

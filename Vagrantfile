@@ -16,14 +16,5 @@ Vagrant.configure('2') do |config|
     v.memory = 2048
   end
 
-  cmd = "if [ ! -f /tmp/installed ]; then " \
-        "sudo apt-get update; sudo apt-get install -y wget git; " \
-        "cd /tmp; wget http://go.googlecode.com/files/go1.2.1.linux-amd64.tar.gz; " \
-        "tar xzf go1.2.1.linux-amd64.tar.gz; " \
-        "echo 'export GOPATH=/tmp\n export GOROOT=/go\n export PATH=$PATH:GOROOT/bin' >> /home/vagrant/.bashrc; " \
-        "GOPATH=/tmp GOROOT=/tmp/go PATH=$PATH:$GOROOT/bin go get github.com/FiloSottile/Heartbleed; " \
-        "GOPATH=/tmp GOROOT=/tmp/go PATH=$PATH:$GOROOT/bin go install github.com/FiloSottile/Heartbleed; " \
-        "fi; echo 'yes' > /tmp/installed; "
-
-  config.vm.provision :shell, :inline => cmd
+  config.vm.provision :shell, :path => './setup.sh'
 end
